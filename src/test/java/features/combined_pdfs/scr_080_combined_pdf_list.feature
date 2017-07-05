@@ -7,8 +7,7 @@ Feature: Combined PDFs
 Scenario: 
 	Given I log into the Clarity Service Portal 
 	And I navigate to the Combined PDFs Page 
-	
-	
+		
 	#    TABLE SECTION
 @smoke_test 
 Scenario: Validate Combined PDFs list table column headers 
