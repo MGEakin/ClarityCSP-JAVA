@@ -9,6 +9,7 @@ Scenario:
 	And I navigate to the Combined PDFs Page 
 		
 	#    TABLE SECTION
+	
 @smoke_test 
 Scenario: Validate Combined PDFs list table column headers 
 	Then the Combined PDFs List table will have the correct column <column_name> headers 
