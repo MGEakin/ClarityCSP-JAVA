@@ -52,6 +52,7 @@ public class scr_071a_holds_list {
 		//Thread.sleep(5000);
 		//BrowserInteractions.click(menu.getHolds());
 		BrowserInteractions.clickWhenElementVisible(driver, menu.getHolds());
+		Thread.sleep(5000);
 		Assert.assertTrue("navigate to Hold page failed",BrowserInteractions.isDisplayed(holds.getPageTile()));
 	}
 
@@ -84,7 +85,7 @@ public class scr_071a_holds_list {
 	@Then("^I am on the Add Hold page$")
 	public void i_am_on_the_Add_Hold_page() throws InterruptedException  {
 		
-		//Thread.sleep(5000);
+		Thread.sleep(5000);
 	    Assert.assertTrue("Add holds page navigation failed", BrowserInteractions.isDisplayed(holds.getEffectiveDate()));
 	    //BrowserInteractions.click(holds.getCancelButton());
 	    BrowserInteractions.clickWhenElementVisible(driver, holds.getCancelButton());
