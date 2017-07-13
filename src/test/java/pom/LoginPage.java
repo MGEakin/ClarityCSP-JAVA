@@ -15,6 +15,15 @@ public class LoginPage {
 	@FindBy(id="loginbtn")
     WebElement loginBtn;
 	
+	@FindBy(id="membername")
+	WebElement memberName;
+	
+	@FindBy(id="userid")
+	WebElement userId;
+	
+	@FindBy(id="dbgroupname")
+	WebElement dbGroupName;
+	
 	public WebElement getGlyphiconPlay() {
 		return glyphiconPlay;
 	}
@@ -27,7 +36,23 @@ public class LoginPage {
 	public void setLoginBtn(WebElement loginBtn) {
 		this.loginBtn = loginBtn;
 	}
+	public WebElement getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(WebElement memberName) {
+		this.memberName = memberName;
+	}
+	public WebElement getUserId() {
+		return userId;
+	}
+	public void setUserId(WebElement userId) {
+		this.userId = userId;
+	}
+	public WebElement getDbGroupName() {
+		return dbGroupName;
+	}
+	public void setDbGroupName(WebElement dbGroupName) {
+		this.dbGroupName = dbGroupName;
+	}
 	
-	
-
 }
