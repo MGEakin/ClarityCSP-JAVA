@@ -27,7 +27,11 @@ public class scr_080_combined_pdf_list {
 		Properties properties = PropertiesLoad.loadFromFile("config.properties");
 		driver.get(properties.getProperty("centric_url"));
 		LoginPage login = new LoginPage(driver);
-		BrowserInteractions.click(login.getGlyphiconPlay());
+		BrowserInteractions.waitUntilElementIsVisible(driver, login.getMemberName());
+		login.getMemberName().sendKeys(properties.getProperty("memberName"));
+		login.getUserId().sendKeys(properties.getProperty("userId"));
+		login.getDbGroupName().sendKeys(properties.getProperty("dbGroupName"));
+		
 		BrowserInteractions.click(login.getLoginBtn());
 		menu = new MenuSubMenuPage(driver);
 		BrowserInteractions.waitUntilElementIsVisible(driver, menu.getHomeMenu());
