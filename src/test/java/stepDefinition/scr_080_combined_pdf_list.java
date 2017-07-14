@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +13,11 @@ import org.openqa.selenium.WebElement;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import pom.CombinedPDFsPage;
 import pom.LoginPage;
 import pom.MenuSubMenuPage;
+import utils.APICall;
+import utils.APIUtils;
 import utils.BrowserFactory;
 import utils.BrowserInteractions;
 import utils.PropertiesLoad;
@@ -62,4 +66,21 @@ public class scr_080_combined_pdf_list {
 		}
 		Assert.assertEquals(headerList, headerListUI);
 	}
+
+	@Then("^the Combined PDFs result count will be as expected$")
+	public void the_Combined_PDFs_result_count_will_be_as_expected() throws Throwable {
+		Properties properties = PropertiesLoad.loadFromFile("config.properties");
+		String APIURL = properties.getProperty("api.url");
+		String token = APIUtils.getToken();
+		String combinedPdFsRequestParameters = "{\"language\":\"ENGLISH\",\"groupDescriptor\":{\"dbName\":\""+properties.getProperty("dbName")+"\",\"groupName\":\""+properties.getProperty("groupName")+"\"},\"combinedPDFSearchRequest\":{\"startPage\":1,\"pageSize\":20,\"days\":3000}}";
+		String combinedPDFsResponse = APICall.getResponse(APIURL+"/combinedpdf/getCombinedPDFs?token="+token, combinedPdFsRequestParameters);
+		String APIRowCount = APIUtils.getValueFromResponse(combinedPDFsResponse, "rowsFound", "int");
+		
+		CombinedPDFsPage combinedPDFsPage = new CombinedPDFsPage(driver);
+		String UIRowCount = combinedPDFsPage.getResultCount().getText().split("of")[1].trim();
+		Assert.assertTrue("API count "+APIRowCount+" not matched UI count"+UIRowCount, StringUtils.equals(APIRowCount, UIRowCount));
+	   
+	}
+	
+	
 }
