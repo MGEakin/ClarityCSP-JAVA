@@ -20,4 +20,7 @@ Scenario: Validate Combined PDFs list table column headers
 		| RESULTS            |
 		| ACTIONS       |
 		
- 
+		
+@smoke_test
+Scenario: Validate result count of Combined PDFs against API count
+Then the Combined PDFs result count will be as expected
