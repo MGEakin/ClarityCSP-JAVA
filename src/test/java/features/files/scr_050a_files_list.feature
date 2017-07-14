@@ -21,3 +21,9 @@ Feature: Files List
       | OVERRIDES     |
       | FILE RECEIVED |
       | ACTIONS       |
+
+      
+@smoke_test
+Scenario: Validate result count of Files against API count
+Then the Files result count will be as expected
+      
