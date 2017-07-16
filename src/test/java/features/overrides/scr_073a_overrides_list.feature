@@ -20,3 +20,12 @@ Feature: SCR_073a Overrides (LIST)
       | STATUS          |
       |ACTIONS          |
 
+@smoke_test
+ Scenario Outline: Validate result count of Overrides Type against API count
+  And I select "<display_select>" in the Overrides Type select list
+  Then the Overrides result count will be as expected
+Examples:
+	  | display_select |
+      | Active         |
+      | Mine           |
+      | All            |
