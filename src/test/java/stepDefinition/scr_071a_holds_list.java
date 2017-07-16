@@ -4,25 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pom.HoldsPage;
-import pom.LoginPage;
 import pom.MenuSubMenuPage;
+import utils.APICall;
+import utils.APIUtils;
 import utils.BrowserFactory;
 import utils.BrowserInteractions;
 import utils.PropertiesLoad;
@@ -129,17 +127,18 @@ public class scr_071a_holds_list {
 	   Thread.sleep(3000);
 	   holds=new HoldsPage(driver);
 	   Assert.assertEquals("Holds ID mismatch", data.get(1).get(0),(holds.getHoldsListId().getText()));
-	   Assert.assertTrue("", data.get(1).get(1).split(" ")[0].trim().equals(holds.getCriteriaC1().getText()));
-	   Assert.assertTrue("", data.get(1).get(1).split(" ")[1].trim().equals(holds.getCriteriaC2().getText()));
-	   Assert.assertTrue("", data.get(1).get(1).split(" ")[2].trim().equals(holds.getCriteriaC3().getText()));
+	   StringBuffer criteria = new  StringBuffer(holds.getCriteriaC1().getText());
+	   criteria.append(" "+holds.getCriteriaC2().getText());
+	   criteria.append(" "+holds.getCriteriaC3().getText());
+	   Assert.assertTrue("Criteria is mismatch", data.get(1).get(1).trim().equalsIgnoreCase(criteria.toString()));
 	   HoldsPage holdsPage=setHoldsPage(data.get(1).get(0));
-	   Assert.assertEquals("", data.get(1).get(2),(holdsPage.getListEffectiveDate().getText()));
-	   Assert.assertEquals("", data.get(1).get(3),(holdsPage.getListExpirationDate().getText()));
-	   Assert.assertEquals("", data.get(1).get(4),(holdsPage.getListAuthor().getText()));
-	   Assert.assertEquals("", data.get(1).get(5),(holds.getListHeldOrders().getText()));
-	   Assert.assertEquals("", data.get(1).get(6),(holdsPage.getListStatus().getText()));
-	   Assert.assertEquals("", data.get(1).get(7),(holds.getListHoldReason().getText()));
-	   Assert.assertEquals("", data.get(1).get(8),(holdsPage.getListResolutionReason().getText()));
+	   Assert.assertEquals("", data.get(1).get(2).trim(),(holdsPage.getListEffectiveDate().getText().trim()));
+	   Assert.assertEquals("", data.get(1).get(3).trim(),(holdsPage.getListExpirationDate().getText().trim()));
+	   Assert.assertEquals("", data.get(1).get(4).trim(),(holdsPage.getListAuthor().getText().trim()));
+	   Assert.assertEquals("", data.get(1).get(5).trim(),(holds.getListHeldOrders().getText().trim()));
+	   Assert.assertEquals("", data.get(1).get(6).trim(),(holdsPage.getListStatus().getText().trim()));
+	   Assert.assertEquals("", data.get(1).get(7).trim(),(holds.getListHoldReason().getText().trim()));
+	   Assert.assertEquals("", data.get(1).get(8).trim(),(holdsPage.getListResolutionReason().getText().trim()));
 	}
 
 
@@ -215,4 +214,21 @@ public class scr_071a_holds_list {
 		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfElementLocated(By.id("file_"+holdsId+"_undefined_action_details")));
 		BrowserInteractions.click(driver.findElement(By.id("file_"+holdsId+"_undefined_action_details"))); 
 	}
-}
+
+	@Then("^the Holds result count will be as expected$")
+	public void the_Holds_result_count_will_be_as_expected() throws Throwable {
+		Properties properties = PropertiesLoad.loadFromFile("config.properties");
+		String APIURL = properties.getProperty("api.url");
+		String token = APIUtils.getToken();
+		String holdsRequestParameters = "{\"language\" : \"ENGLISH\",\"holdSummarySearchCriteria\":{\"startPage\": 1,\"pageSize\": 20,\"groupDescriptor\": {\"dbName\":\""+properties.getProperty("dbName")+"\",\"groupName\":\""+properties.getProperty("groupName")+"\"}}}"; 
+
+		String holdsResponse = APICall.getResponse(APIURL+"/holds/getHolds?token="+token, holdsRequestParameters);
+		String APIRowCount = APIUtils.getValueFromResponse(holdsResponse, "rowsFound", "int");
+		
+		HoldsPage holdsPage = new HoldsPage(driver);
+		String UIRowCount = holdsPage.getResultsCount().getText().split("of")[1].trim();
+		
+		Assert.assertTrue("API count "+APIRowCount+" not matched UI count"+UIRowCount, StringUtils.equals(APIRowCount, UIRowCount));
+	}
+	}
+
