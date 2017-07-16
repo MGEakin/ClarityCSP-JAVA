@@ -13,5 +13,26 @@ public class OverridesPage {
 		PageFactory.initElements(driver, this);
 	}
 
+	@FindBy(className = "resultsCount")
+	WebElement resultsCount;
+	
+	@FindBy(id = "overrideTypeDisplay")
+	WebElement overrideTypeDisplay;
+	public WebElement getResultsCount() {
+		return resultsCount;
+	}
+
+	public void setResultsCount(WebElement resultsCount) {
+		this.resultsCount = resultsCount;
+	}
+
+	public WebElement getOverrideTypeDisplay() {
+		return overrideTypeDisplay;
+	}
+
+	public void setOverrideTypeDisplay(WebElement overrideTypeDisplay) {
+		this.overrideTypeDisplay = overrideTypeDisplay;
+	}
+
 
 }
