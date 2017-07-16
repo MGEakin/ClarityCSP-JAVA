@@ -34,6 +34,9 @@ public class HoldsPage {
 	@FindBy(xpath=".//*[@id='prodholds']/tbody/tr[1]/td[1]")
 	WebElement holdsListId;
 	
+	@FindBy(className = "resultsCount")
+	WebElement resultsCount;
+	
 	@FindBy(xpath=".//*[@id='c1']")
 	WebElement criteriaC1;
 	 
@@ -331,6 +334,30 @@ public class HoldsPage {
 
 	public void setDetailsOptionInGreasDropdown(WebElement detailsOptionInGreasDropdown) {
 		this.detailsOptionInGreasDropdown = detailsOptionInGreasDropdown;
+	}
+	
+	public WebElement getResultsCount() {
+		return resultsCount;
+	}
+
+	public void setResultsCount(WebElement resultsCount) {
+		this.resultsCount = resultsCount;
+	}
+
+	public WebElement getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(WebElement expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public WebElement getSaveButton() {
+		return saveButton;
+	}
+
+	public void setSaveButton(WebElement saveButton) {
+		this.saveButton = saveButton;
 	}
 	
 }
