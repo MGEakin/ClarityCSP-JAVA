@@ -78,7 +78,7 @@ Feature: Holds List
     When I select "Mine" in the Holds List Status select list
     Then the following holds row content will be correct
       | HOLDS ID | CRITERIA                | EFFECTIVE DATE | EXPIRATION DATE | AUTHOR   | HELD ORDERS | STATUS   | HOLD REASON   | RESOLUTION REASON            |
-      |     8528 | PLAN_ID not equal Sample Value | 05/01/2017  | 05/13/2017  |  268     |       1096  | Approved | Design Change |  Verified Cost Sharing       |
+      |     8528 | PLAN_ID not equal Sample Value | 05/01/2017  | 05/13/2017  |  268     |       21096  | Approved | Design Change |  Verified Cost Sharing       |
 
   #Scenario: Ability to Cancelled filter the hold List and get correct results - validate API return
   # When I select "Mine" in the Holds List Status select list
@@ -114,7 +114,7 @@ Feature: Holds List
   #Then the Holds row content will match the API results
   Scenario: Validate Holds List content is correct
     When I select "All" in the Holds List Status select list
-    When I search Holds by HOLDS ID with a value of "9"
+    When I search Holds by HOLDS ID with a value of "1"
     Then the following holds row content will be correct
       | HOLDS ID | CRITERIA           | EFFECTIVE DATE | EXPIRATION DATE | AUTHOR       | HELD ORDERS | STATUS    | HOLD REASON    | RESOLUTION REASON |
       | 1        | FAMILY_ID equal 1030299 | 03/02/2017     | 03/31/2017      | npisani_all | 6         | Approved | Design Change |  Management Approval Required |
@@ -123,3 +123,8 @@ Feature: Holds List
     When I select "All" in the Holds List Status select list
     When I select the Holds ID of the first record displayed
     Then I am on the Hold Details page
+
+@smoke_test
+Scenario: Validate result count of Holds against API count
+When I select "All" in the Holds List Status select list
+Then the Holds result count will be as expected
