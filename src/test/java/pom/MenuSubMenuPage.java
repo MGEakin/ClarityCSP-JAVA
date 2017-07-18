@@ -35,6 +35,9 @@ public class MenuSubMenuPage {
 	@FindBy(id="sub-menu-sampleorders")
 	WebElement subMenuSampleOrders;
 	
+	@FindBy(id="sub-menu-members")
+	WebElement subMenuMembers;
+	
 	
 	public WebElement getSubMenuSampleOrders() {
 		return subMenuSampleOrders;
@@ -98,6 +101,14 @@ public class MenuSubMenuPage {
 
 	public void setSubMenuOverrides(WebElement subMenuOverrides) {
 		this.subMenuOverrides = subMenuOverrides;
+	}
+
+	public WebElement getSubMenuMembers() {
+		return subMenuMembers;
+	}
+
+	public void setSubMenuMembers(WebElement subMenuMembers) {
+		this.subMenuMembers = subMenuMembers;
 	}
 	
 	
