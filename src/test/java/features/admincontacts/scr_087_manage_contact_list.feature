@@ -22,8 +22,6 @@ Scenario:
 	|HOME DISPLAY|
 	|ACTIONS|
 
-
-	
 @smoke_test 
 Scenario: Validate result count of Manage Contacts against API count 
  Then the Manage Contacts result count will be as expected 
@@ -33,7 +31,6 @@ Scenario: Validate Manage Contacts page title and mesasge
  Then I am on the Manage Contacts List page
   And I see the text "Use this screen to manage this client's Clarity and internal contacts." on the Manage Conatcts screen
 	
-
 Scenario: Validate Manage Contacts List content is correct
    Then the following Manage Contacts row content will be correct
     | SUPPORT ROLE   |  CONTACT COMPANY  | CONTACT NAME    | CONTACT EMAIL 			 | CONTACT PHONE | HOME DISPLAY  | ACTIONS   |
