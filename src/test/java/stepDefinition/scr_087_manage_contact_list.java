@@ -125,13 +125,13 @@ public class scr_087_manage_contact_list {
 	 List<List<String>> data = dataTable.raw();
 	 adminContacts = new AdminContactsPage(driver);
 	 Thread.sleep(5000);
-	 Assert.assertEquals("Contact Name mistmatch",data.get(1).get(0),adminContacts.getEditPageContactName().getAttribute("value"));
-	 Assert.assertEquals("Contact Name mistmatch",data.get(1).get(1),adminContacts.getEditPageContactEmail().getAttribute("value"));
-	 Assert.assertEquals("Contact Name mistmatch",data.get(1).get(2),adminContacts.getEditPageContactPhone().getAttribute("value"));
-	 Assert.assertEquals("Contact Name mistmatch",data.get(1).get(3),adminContacts.getEditPageContactCompany().getAttribute("value"));
-	 Assert.assertEquals("Contact Name mistmatch",data.get(1).get(4),adminContacts.getEditPageSupportRole().getAttribute("value"));
-	 Assert.assertEquals("Contact Name mistmatch",data.get(1).get(5),adminContacts.getEditPageDisplayContact().getAttribute("value"));
-	 Assert.assertEquals("Contact Name mistmatch",data.get(1).get(6),adminContacts.getEditPageNewSupportRoleName().getAttribute("value"));
+	 Assert.assertEquals("Data mismatch in Contact Name",data.get(1).get(0),adminContacts.getEditPageContactName().getAttribute("value"));
+	 Assert.assertEquals("Data mismatch in Contact Email",data.get(1).get(1),adminContacts.getEditPageContactEmail().getAttribute("value"));
+	 Assert.assertEquals("Data mismatch in Contact Phone",data.get(1).get(2),adminContacts.getEditPageContactPhone().getAttribute("value"));
+	 Assert.assertEquals("Data mismatch in Contact Company",data.get(1).get(3),adminContacts.getEditPageContactCompany().getAttribute("value"));
+	 Assert.assertEquals("Data mismatch in Support Role",data.get(1).get(4),adminContacts.getEditPageSupportRole().getAttribute("value"));
+	 Assert.assertEquals("Data mismatch in Display Contact",data.get(1).get(5),adminContacts.getEditPageDisplayContact().getAttribute("value"));
+	 Assert.assertEquals("Data mismatch in New Support Role",data.get(1).get(6),adminContacts.getEditPageNewSupportRoleName().getAttribute("value"));
 	 
 	 }
 
