@@ -128,6 +128,9 @@ public class AdminContactsPage {
 		@FindBy(id="cancelButton")
 		WebElement editPageCancelButton;
 		
+		@FindBy(xpath=".//*[@id='addContactButton'][1]")
+		WebElement addContactButton;
+		
 		@FindBy(xpath=".//*[@id='addContactButton']")
 		WebElement manageContactsCancelButton;
 		
@@ -152,7 +155,7 @@ public class AdminContactsPage {
 		@FindBy(className="resultsCount")
 		WebElement secondPageResultCount;
 		
-		@FindBy(xpath=".//*[@id='pager_prev_page']/i")
+		@FindBy(xpath=".//*[@id='pager_prev_page']")
 		WebElement paginationBackwardArrow;
 		
 		@FindBy(xpath=".//*[@id='pager_goto_page_2']")
@@ -163,6 +166,7 @@ public class AdminContactsPage {
 		
 		@FindBy(xpath=".//*[@id='addContactButton'][1]")
 		WebElement contactsAddButton;
+		
 		
 		@FindBy(xpath="html/body/app-root/div[3]/contact-details/div[1]")
 		WebElement screenText;
@@ -182,7 +186,7 @@ public class AdminContactsPage {
 		@FindBy(xpath=".//*[@id='pager_goto_page_2']")
 		WebElement highlightButtonPage2;
 		 
-		
+			
 		public WebElement getContactButton() {
 			return contactButton;
 		}
@@ -660,5 +664,14 @@ public class AdminContactsPage {
 		public void setHighlightButtonPage2(WebElement highlightButtonPage2) {
 			this.highlightButtonPage2 = highlightButtonPage2;
 		}
+
+		public WebElement getAddContactButton() {
+			return addContactButton;
+		}
+
+		public void setAddContactButton(WebElement addContactButton) {
+			this.addContactButton = addContactButton;
+		}
+		
 }
 
