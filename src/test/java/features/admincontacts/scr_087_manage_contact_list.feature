@@ -60,7 +60,6 @@ Scenario: Validate Items per page selection count
    | 20         |
    | 50         |
    | 100        |
-   
    	
 Scenario: Validate Items per page default value is 20
 Then the default page selection is "20"
