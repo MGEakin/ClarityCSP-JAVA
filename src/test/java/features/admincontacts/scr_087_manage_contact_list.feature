@@ -64,3 +64,44 @@ Scenario: Validate Items per page selection count
 Scenario: Validate Items per page default value is 20
 Then the default page selection is "20"
 
+Scenario: Validate Items per page - select will cause page refresh
+    When I select "50" in the Pagination - Manage Contacts select list
+    Then the Manage Contacts result count will be as expected
+    When I select "100" in the Pagination - Manage Contacts select list
+    Then the Manage Contacts result count will be as expected
+    When I select "20" in the Pagination - Manage Contacts select list
+    Then the Manage Contacts result count will be as expected
+
+  Scenario: Validate Manage Contacts List pagination controls - Forward arrow
+    When I click the Forward Pagination arrow
+    Then the Manage Contacts result count will be as expected
+
+  Scenario: Validate Manage Contacts List pagination controls - Backward arrow
+    And I click the Forward Pagination arrow
+    When I click the Backward Pagination arrow
+    Then the Manage Contacts result count will be as expected
+
+  Scenario: Validate Manage Contacts List pagination controls - select Page 2
+    When I navigate to Page 2
+    Then the Manage Contacts result count will be as expected
+
+  Scenario: Validate Manage Contacts List pagination controls - back to page 1
+    When I navigate to Page 2
+    Then I navigate to Page 1
+    Then the Manage Contacts result count will be as expected
+
+  Scenario: Validate Pagination Page 1 highlighted on default
+    Then Manage Contacts Page number 1 will be highlighted
+    When I navigate to Page 2
+    Then Manage Contacts Page number 2 will be highlighted
+    Then I navigate to Page 1
+    Then Manage Contacts Page number 1 will be highlighted
+
+  Scenario: click on Cancel button taken back to Admin Page
+    When I click on the element "Manage Contacts - Cancel" button
+    Then I am on the Administration page
+
+
+  
+
+
