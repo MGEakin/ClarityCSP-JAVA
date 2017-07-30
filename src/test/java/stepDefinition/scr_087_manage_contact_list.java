@@ -70,7 +70,6 @@ public class scr_087_manage_contact_list {
 		String UIRowCount = adminContactsPage.getResultsCount().getText().split("of")[1].trim();
 		Assert.assertTrue("API count " + APIRowCount + " not matched UI count" + UIRowCount,
 				StringUtils.equals(APIRowCount, UIRowCount));
-
 	}
 
 	@Then("^I am on the Manage Contacts List page$")
@@ -79,7 +78,6 @@ public class scr_087_manage_contact_list {
 		Thread.sleep(5000);
 		Assert.assertTrue("Contacts List Page Loading failed",
 				BrowserInteractions.isDisplayed(adminContacts.getPageFirstElement()));
-
 	}
 
 	@Then("^I see the text \"([^\"]*)\" on the Manage Conatcts screen$")
@@ -118,12 +116,10 @@ public class scr_087_manage_contact_list {
 
 	@Then("^I am on the Edit and Create Contacts page$")
 	public void i_am_on_the_Edit_and_Create_Contacts_page() throws Throwable {
-
 		adminContacts = new AdminContactsPage(driver);
 		Thread.sleep(5000);
 		Assert.assertTrue("Contacts List Page Loading failed",
 				BrowserInteractions.isDisplayed(adminContacts.getEditPageFirstElement()));
-
 	}
 
 	@Then("^the following Edit and Create Contacts row content will be correct$")
@@ -146,12 +142,10 @@ public class scr_087_manage_contact_list {
 				adminContacts.getEditPageDisplayContact().getAttribute("value"));
 		Assert.assertEquals("Data mismatch in New Support Role", data.get(1).get(6),
 				adminContacts.getEditPageNewSupportRoleName().getAttribute("value"));
-
 	}
 
 	@When("^I select the Manage Contact - Delete action$")
 	public void i_select_the_Manage_Contact_Delete_action() throws Throwable {
-
 		adminContacts = new AdminContactsPage(driver);
 		BrowserInteractions.click(adminContacts.getEditPageCancelButton());
 		Thread.sleep(3000);
@@ -175,12 +169,10 @@ public class scr_087_manage_contact_list {
 
 	@Then("^I do not see the text \"([^\"]*)\" on the screen$")
 	public void i_do_not_see_the_text_on_the_screen(String arg1) throws Throwable {
-
 		adminContacts = new AdminContactsPage(driver);
 		Thread.sleep(5000);
 		Assert.assertTrue("I am not on manage contact page list",
 				BrowserInteractions.isDisplayed(adminContacts.getPageFirstElement()));
-
 	}
 
 	@Given("^the Manage Contacts list page count display list will contain$")
@@ -245,7 +237,6 @@ public class scr_087_manage_contact_list {
 		Thread.sleep(3000);
 		adminContacts = new AdminContactsPage(driver);
 		BrowserInteractions.click(adminContacts.getPaginationBackwardArrow());
-
 	}
 
 	@Then("^the Manage Contacts result count after clicking backward pagination arrow will be as expected$")
@@ -254,14 +245,11 @@ public class scr_087_manage_contact_list {
 		Select dropdown = new Select(adminContacts.getContactsPageCount());
 		Assert.assertEquals("Result count mismtach", dropdown.getFirstSelectedOption().getText(),
 				adminContacts.getPageCountResultCount().getText().split("to")[1].trim());
-
 	}
 
 	@When("^I navigate to Page (\\d+)$")
 	public void i_navigate_to_Page(int pageNumber) throws Throwable {
-
 		BrowserInteractions.click(driver.findElement(By.id("pager_goto_page_" + pageNumber)));
-
 	}
 
 	@When("^I navigate to Manage Contacts Page (\\d+)$")
@@ -272,12 +260,10 @@ public class scr_087_manage_contact_list {
 
 	@Then("^the Manage Contacts result count on page (\\d+) will be as expected$")
 	public void the_Manage_Contacts_result_count_on_page_will_be_as_expected(int resultCount) throws Throwable {
-
 		String pageCounts = adminContacts.getPageCountResultCount().getText().split("to")[1].trim();
 		int pageCount = Integer.parseInt(pageCounts);
 		Assert.assertEquals("Result count mismtach",
 				adminContacts.getSecondPageResultCount().getText().split(":")[1].trim(), pageCount + 1);
-
 	}
 
 	@Then("^Manage Contacts Page number (\\d+) will be highlighted$")
@@ -307,4 +293,21 @@ public class scr_087_manage_contact_list {
 		Assert.assertTrue("Contacts List Page Loading failed",
 				BrowserInteractions.isDisplayed(adminContacts.getAdminPageFirstTitle()));
 	}
+
+	@When("^I click on the element \"([^\"]*)\" page element button$")
+	public void i_click_on_the_element_page_element_button(String arg1) throws Throwable {
+		adminContacts = new AdminContactsPage(driver);
+		Thread.sleep(2000);
+		driver.findElement(By.linkText("Contacts")).click();
+		Thread.sleep(5000);
+		BrowserInteractions.click(adminContacts.getAddContactButton());
+	}
+
+	@Then("^I am on the page of Edit and Create Contacts page$")
+	public void i_am_on_the_page_of_Edit_and_Create_Contacts_page() throws Throwable {
+		adminContacts = new AdminContactsPage(driver);
+		Thread.sleep(5000);
+		Assert.assertTrue("Contacts List Page Loading failed",BrowserInteractions.isDisplayed(adminContacts.getEditPageFirstElement()));
+	}
+
 }
