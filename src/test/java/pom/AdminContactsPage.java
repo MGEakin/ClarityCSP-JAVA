@@ -640,7 +640,6 @@ public class AdminContactsPage {
 		public WebElement getAddContactButton() {
 			return addContactButton;
 		}
-
 		public void setAddContactButton(WebElement addContactButton) {
 			this.addContactButton = addContactButton;
 		}
