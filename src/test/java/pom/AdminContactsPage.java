@@ -167,7 +167,6 @@ public class AdminContactsPage {
 		@FindBy(xpath=".//*[@id='addContactButton'][1]")
 		WebElement contactsAddButton;
 		
-		
 		@FindBy(xpath="html/body/app-root/div[3]/contact-details/div[1]")
 		WebElement screenText;
 		
@@ -239,8 +238,6 @@ public class AdminContactsPage {
 			return contactPhone;
 		}
 		
-		
-
 		public WebElement getContactPhoneError0() {
 			return contactPhoneError0;
 		}
@@ -453,21 +450,17 @@ public class AdminContactsPage {
 			this.editPageSaveButton = editPageSaveButton;
 		}
 
-
 		public WebElement getDeleteButton() {
 			return deleteButton;
 		}
-
 
 		public void setDeleteButton(WebElement deleteButton) {
 			this.deleteButton = deleteButton;
 		}
 
-
 		public WebElement getDeletePageFirstElement() {
 			return deletePageFirstElement;
 		}
-
 
 		public void setDeletePageFirstElement(WebElement deletePageFirstElement) {
 			this.deletePageFirstElement = deletePageFirstElement;
@@ -478,46 +471,37 @@ public class AdminContactsPage {
 			return cancelButton;
 		}
 
-
 		public void setCancelButton(WebElement cancelButton) {
 			this.cancelButton = cancelButton;
 		}
-
 
 		public WebElement getEditPageCancelButton() {
 			return editPageCancelButton;
 		}
 
-
 		public void setEditPageCancelButton(WebElement editPageCancelButton) {
 			this.editPageCancelButton = editPageCancelButton;
 		}
-
 
 		public WebElement getManageContactsCancelButton() {
 			return manageContactsCancelButton;
 		}
 
-
 		public void setManageContactsCancelButton(WebElement manageContactsCancelButton) {
 			this.manageContactsCancelButton = manageContactsCancelButton;
 		}
-
 
 		public WebElement getAdminPageFirstTitle() {
 			return adminPageFirstTitle;
 		}
 
-
 		public void setAdminPageFirstTitle(WebElement adminPageFirstTitle) {
 			this.adminPageFirstTitle = adminPageFirstTitle;
 		}
 
-
 		public WebElement getContactsPageCount() {
 			return contactsPageCount;
 		}
-
 
 		public void setContactsPageCount(WebElement contactsPageCount) {
 			this.contactsPageCount = contactsPageCount;
@@ -528,21 +512,17 @@ public class AdminContactsPage {
 			return pageCountResultCount;
 		}
 
-
 		public void setPageCountResultCount(WebElement pageCountResultCount) {
 			this.pageCountResultCount = pageCountResultCount;
 		}
-
 
 		public WebElement getActionsElements() {
 			return actionsElements;
 		}
 
-
 		public void setActionsElements(WebElement actionsElements) {
 			this.actionsElements = actionsElements;
 		}
-
 
 		public WebElement getDisplayCountContact() {
 			return displayCountContact;
@@ -553,41 +533,33 @@ public class AdminContactsPage {
 			this.displayCountContact = displayCountContact;
 		}
 
-
 		public WebElement getPaginationForwardArrow() {
 			return paginationForwardArrow;
 		}
-
 
 		public void setPaginationForwardArrow(WebElement paginationForwardArrow) {
 			this.paginationForwardArrow = paginationForwardArrow;
 		}
 
-
 		public WebElement getSecondPageResultCount() {
 			return secondPageResultCount;
 		}
-
 
 		public void setSecondPageResultCount(WebElement secondPageResultCount) {
 			this.secondPageResultCount = secondPageResultCount;
 		}
 
-
 		public WebElement getPaginationBackwardArrow() {
 			return paginationBackwardArrow;
 		}
-
 
 		public void setPaginationBackwardArrow(WebElement paginationBackwardArrow) {
 			this.paginationBackwardArrow = paginationBackwardArrow;
 		}
 
-
 		public WebElement getPageNo2() {
 			return pageNo2;
 		}
-
 
 		public void setPageNo2(WebElement pageNo2) {
 			this.pageNo2 = pageNo2;
@@ -672,6 +644,5 @@ public class AdminContactsPage {
 		public void setAddContactButton(WebElement addContactButton) {
 			this.addContactButton = addContactButton;
 		}
-		
 }
 
