@@ -3,11 +3,8 @@ Feature: Manage Contacts
 	SCR_087 Manage Contacts
 
 Scenario: 
-#Given I log in using a ClarityTestMiniKit client
 	Given I log into the Clarity Service Portal
-	#And I navigate to manage Contacts Page 
 	And I navigate to the manage contacts Page
-	
 
 #    TABLE SECTION
 @smoke_test
@@ -101,7 +98,9 @@ Scenario: Validate Items per page - select will cause page refresh
     When I click on the element "Manage Contacts - Cancel" button
     Then I am on the Administration page
 
-
+Scenario: click on Add Contact button taken to Add Contact Page
+    When I click on the element "Manage Contacts - Add Contact" page element button
+	Then I am on the page of Edit and Create Contacts page
   
 
 
