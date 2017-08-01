@@ -161,10 +161,10 @@ public class scr_088_edit_and_create_contacts {
 	
 	@And("^I click the Create Contact save button$")
 	public void i_click_the_Create_Contact_save_button() throws Throwable {
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		adminContacts = new AdminContactsPage(driver);
 		BrowserInteractions.click(adminContacts.getSaveButton());
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		BrowserInteractions.click(adminContacts.getOkButton());
 	}
 	
@@ -173,14 +173,14 @@ public class scr_088_edit_and_create_contacts {
 		Thread.sleep(3000);
 		adminContacts = new AdminContactsPage(driver);
 		Assert.assertFalse("Save button is enabled", adminContacts.getSaveButton().getAttribute("class").contains("disabledButton"));
-		BrowserInteractions.clickWhenElementVisible(driver,adminContacts.getCancelButton());
+		BrowserInteractions.clickWhenElementVisible(driver,adminContacts.getEditPageCancelButton());
 	}
 	
 	@When("^I click on the Create Contact - Cancel element button$")
 	public void i_click_on_the_Create_Contact_Cancel_element_button() throws Throwable {
 		Thread.sleep(3000);
 		adminContacts = new AdminContactsPage(driver);
-		BrowserInteractions.clickWhenElementVisible(driver,adminContacts.getCancelButton());
+		BrowserInteractions.clickWhenElementVisible(driver,adminContacts.getEditPageCancelButton());
 	}
 
 	@Given("^I enter \"([^\"]*)\" in the Contact Name field$")
@@ -216,5 +216,34 @@ public class scr_088_edit_and_create_contacts {
 			Assert.assertEquals("Data mismatch in Contact PhoneNo", data.get(1).get(4).trim(), (adminContacts.getContactPhoneNo().getText().trim()));
 			Assert.assertEquals("Data mismatch in Home Display", data.get(1).get(5).trim(), (adminContacts.getHomeDisplay().getText().trim()));
 			Assert.assertEquals("Data mismatch in Actions Elements", data.get(1).get(6).replaceAll("\\s",""), (adminContacts.getActionsElements().getText().replaceAll("\\r|\\n|\\s", "")));
+	}
+	
+	@When("^I select the Manage Contact - Edit action element$")
+	public void i_select_the_Manage_Contact_Edit_action_element() throws Throwable {
+		Thread.sleep(3000);
+		adminContacts = new AdminContactsPage(driver);
+		BrowserInteractions.click(adminContacts.getEditContact());
+	}
+
+	@When("^the following Edit Contacts row content will be correct$")
+	public void the_following_Edit_Contacts_row_content_will_be_correct(DataTable dataTable) throws Throwable {
+		List<List<String>> data = dataTable.raw();
+		adminContacts = new AdminContactsPage(driver);
+		Thread.sleep(5000);
+		Assert.assertEquals("Data mismatch in Contact Name", data.get(1).get(0),
+				adminContacts.getEditPageContactName().getAttribute("value"));
+		Assert.assertEquals("Data mismatch in Contact Email", data.get(1).get(1),
+				adminContacts.getEditPageContactEmail().getAttribute("value"));
+		Assert.assertEquals("Data mismatch in Contact Phone", data.get(1).get(2),
+				adminContacts.getEditPageContactPhone().getAttribute("value"));
+		Assert.assertEquals("Data mismatch in Contact Company", data.get(1).get(3),
+				adminContacts.getEditPageContactCompany().getAttribute("value"));
+		Assert.assertEquals("Data mismatch in Support Role", data.get(1).get(4),
+				adminContacts.getEditPageSupportRole().getAttribute("value"));
+		Assert.assertEquals("Data mismatch in Display Contact", data.get(1).get(5),
+				adminContacts.getEditPageDisplayContact().getAttribute("value"));
+		Assert.assertEquals("Data mismatch in New Support Role", data.get(1).get(6),
+				adminContacts.getEditPageNewSupportRoleName().getAttribute("value"));
+		BrowserInteractions.click(adminContacts.getCancelButton());
 	}
 }
