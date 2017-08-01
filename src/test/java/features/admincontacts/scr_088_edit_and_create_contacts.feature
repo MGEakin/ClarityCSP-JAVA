@@ -68,3 +68,20 @@ Scenario: Submit button taken back to Edit and Create Contacts List with new Con
     And the following Manage Contacts row content in this scenario will be correct
       | SUPPORT ROLE        | CONTACT COMPANY  | CONTACT NAME     | CONTACT EMAIL                 | CONTACT PHONE | HOME DISPLAY | ACTIONS     |
       | General IT Resource |  ClarityTestCards| 1111 Matt Tester | matt.tester@mattthetester.com | 888-888-8888  | Yes          | Edit Delete |
+
+Scenario: Edit Contact - validate information brought over
+  And I sort the Manage Contacts table by the CONTACT NAME column
+  When I select the Manage Contact - Edit action element
+  And the following Edit Contacts row content will be correct
+  | CONTACT NAME        | CONTACT EMAIL       | CONTACT PHONE        | CONTACT COMPANY    | SUPPORT ROLE  | Display Contact on Home Page |New Support Role Name| 
+  | ZZZ1134Name         | 1134@clarityssi.com | 111-111-1134         | ClarityTestCards   | New           | No                           | Day to day          |	
+  
+ Scenario: Edit Contact - update successful
+    And I sort the Manage Contacts table by the CONTACT NAME column
+    When I select the Manage Contact - Edit action
+	And I click the Create Contact save button
+    Then I am on the Manage Contacts List page
+    And I sort the Manage Contacts table by the CONTACT NAME column
+    And the following Manage Contacts row content in this scenario will be correct
+     | SUPPORT ROLE        | CONTACT COMPANY  | CONTACT NAME         | CONTACT EMAIL                 | CONTACT PHONE | HOME DISPLAY | ACTIONS     |
+     | General IT Resource | ClarityTestCards | 1111 Matt Tester     | matt.tester@mattthetester.com | 888-888-8888  | Yes          | Edit Delete |
