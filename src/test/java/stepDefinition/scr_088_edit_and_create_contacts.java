@@ -1,5 +1,7 @@
 package stepDefinition;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -204,7 +206,7 @@ public class scr_088_edit_and_create_contacts {
 
 	@Then("^the following Manage Contacts row content in this scenario will be correct$")
 	public void the_following_Manage_Contacts_row_content_in_this_scenario_will_be_correct(DataTable dataTable) throws Throwable {
-			List<List<String>> data=dataTable.raw();
+			List<List<String>> data = dataTable.raw();
 		    Thread.sleep(3000);
 		    adminContacts = new AdminContactsPage(driver);
 			Assert.assertEquals("Data mismatch in Support Role", data.get(1).get(0).trim(), (adminContacts.getSupportRole().getText().trim()));
