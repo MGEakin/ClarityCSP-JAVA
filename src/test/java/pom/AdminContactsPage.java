@@ -170,7 +170,7 @@ public class AdminContactsPage {
 		@FindBy(xpath="html/body/app-root/div[3]/contact-details/div[1]")
 		WebElement screenText;
 		
-		@FindBy(xpath=".//*[@id='saveButton']")
+		@FindBy(id="saveButton")
 		WebElement saveButton;
 		
 		@FindBy(id="ok_button")
@@ -185,7 +185,6 @@ public class AdminContactsPage {
 		@FindBy(xpath=".//*[@id='pager_goto_page_2']")
 		WebElement highlightButtonPage2;
 		 
-			
 		public WebElement getContactButton() {
 			return contactButton;
 		}
