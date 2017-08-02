@@ -1,6 +1,5 @@
 package stepDefinition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -34,7 +33,6 @@ public class scr_081_request_combined_pdf_form {
 
 	@Given("^I click the Combined PDF - Add Request button$")
 	public void i_click_the_Combined_PDF_Add_Request_button() throws Throwable {
-	  
 		CombinedPDFsPage CombinedPDFs = new CombinedPDFsPage(driver);
 		BrowserInteractions.clickWhenElementVisible(driver, CombinedPDFs.getAddRequestButton());
 	}
@@ -49,12 +47,10 @@ public class scr_081_request_combined_pdf_form {
 
 	@When("^I enter \"([^\"]*)\" in the Combined PDF - JOB ID field$")
 	public void i_enter_in_the_Combined_PDF_JOB_ID_field(String jobID) throws Throwable {
-
      	Thread.sleep(3000);
     	CombinedPDFsPage CombinedPDFs = new CombinedPDFsPage(driver);
 		this.jobID = jobID;
 		CombinedPDFs.getJobId().sendKeys(jobID);
-		
 	}
 		
 	@When("^I click the Request Combined PDF - SUBMIT button$")
@@ -76,7 +72,6 @@ public class scr_081_request_combined_pdf_form {
 		{
 			Assert.assertEquals("Data mismatch", data.get(1).get(cnum).replaceAll("\\s", ""),
 					(columns.get(cnum).getText().replaceAll("\\r|\\n|\\s", "")));
-			
 		}
 		BrowserInteractions.clickWhenElementVisible(driver, CombinedPDFs.getAddRequestButton());
 	}
@@ -91,7 +86,6 @@ public class scr_081_request_combined_pdf_form {
 
 	@When("^I enter \"([^\"]*)\" in the Combined PDF - PROCESSED DATE field$")
 	public void i_enter_in_the_Combined_PDF_PROCESSED_DATE_field(String processedDate) throws Throwable {
-		
 		 CombinedPDFsPage CombinedPDFs = new CombinedPDFsPage(driver);
 		 Thread.sleep(3000);
 		 Select dropdown= new Select(CombinedPDFs.getProcessedDateDropdown());
@@ -107,7 +101,6 @@ public class scr_081_request_combined_pdf_form {
     	CombinedPDFsPage CombinedPDFs = new CombinedPDFsPage(driver);
     	this.groupID = groupID;
 		CombinedPDFs.getGroupID().sendKeys(groupID);
-		
 	}
 	
 	@When("^I enter \"([^\"]*)\" in the Combined PDF - PLAN ID field$")
@@ -116,6 +109,5 @@ public class scr_081_request_combined_pdf_form {
     	CombinedPDFsPage CombinedPDFs = new CombinedPDFsPage(driver);
     	this.planID = planID;
 		CombinedPDFs.getPlanID().sendKeys(planID);
-		
 	}
 }
