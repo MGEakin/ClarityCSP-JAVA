@@ -9,13 +9,16 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import pom.ErrorsPage;
 import pom.LoginPage;
 import pom.MenuSubMenuPage;
+import pom.ViewReportPage;
 import utils.APICall;
 import utils.APIUtils;
 import utils.BrowserFactory;
@@ -28,6 +31,7 @@ public class scr_052_errors_list {
 	MenuSubMenuPage menu;
 	
 	ErrorsPage errors;
+	ViewReportPage viewreport;
 	
 	@Given("^I log in using a ClarityTestBooks client$")
 	public void i_log_in_using_a_ClarityTestBooks_client() throws Throwable {
@@ -104,7 +108,108 @@ public class scr_052_errors_list {
 		Assert.assertTrue("API count "+APIRowCount+" not matched UI count"+UIRowCount, StringUtils.equals(APIRowCount, UIRowCount));
 	}
 
+	@When("^I click the Errors - View Report button$")
+	public void i_click_the_Errors_View_Report_button() throws Throwable {
+	   
+		errors = new ErrorsPage(driver);
+		menu = new MenuSubMenuPage(driver);
+		BrowserInteractions.click(menu.getProduction());
+		BrowserInteractions.clickWhenElementVisible(driver, menu.getSubMenuPdfs());
+		viewreport = new ViewReportPage(driver) ;
+		Thread.sleep(4000);
+		WebElement errorLinktd =  viewreport.getErrorLink();
+		System.out.println(" ****** "+errorLinktd.getText());
+		errorLinktd.findElement(By.tagName("a")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.linkText("VIEW REPORT")).click();
+		Thread.sleep(2000);
+		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+	    driver.switchTo().window(tabs2.get(0));
+	    driver.close();
+	    driver.switchTo().window(tabs2.get(1));
+		
+	}
+	
+	@Then("^I am on View Report Window page$")
+	public void i_am_on_View_Report_Window_page() throws Throwable {
+	    
+		Thread.sleep(3000);
+		errors = new ErrorsPage(driver);
+		Assert.assertEquals("Unable to go view report page","Error Report", errors.getViewReportTitle().getText());
+	}
+	
+	@When("^I click the Errors - View File Details button$")
+	public void i_click_the_Errors_View_File_Details_button() throws Throwable {
+	   
+		menu = new MenuSubMenuPage(driver);
+		errors = new ErrorsPage(driver);
+		BrowserInteractions.clickWhenElementVisible(driver, menu.getSubMenuPdfs());	
+		Thread.sleep(4000);
+		WebElement errorsLinktd = errors.getErrorLink();
+		errorsLinktd.findElement(By.tagName("a")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.linkText("VIEW FILE DETAILS")).click();
+		
 	}
 
+	@Then("^I am on the File Details page$")
+	public void i_am_on_the_File_Details_page() throws Throwable {
+		Thread.sleep(3000);
+		errors = new ErrorsPage(driver);
+		Assert.assertEquals("Unable to go view report page","File Details", errors.getViewFileDetailsTitle().getText());
+		
+	}
+
+
+@When("^I sort the Errors table by the DATE column$")
+public void i_sort_the_Errors_table_by_the_DATE_column() throws Throwable {
+	
+	BrowserInteractions.clickWhenElementVisible(driver, menu.getSubMenuPdfs());	
+	Thread.sleep(4000);
+	WebElement errorsLinktd = errors.getErrorLink();
+	errorsLinktd.findElement(By.tagName("a")).click();
+	Thread.sleep(3000);
+		errors = new ErrorsPage(driver);
+		BrowserInteractions.click(errors.getSortButton());
+	}
+
+	@Given("^the Page Count display list will contain$")
+	public void the_Page_Count_display_list_will_contain(DataTable dataTable) throws Throwable {
+		ErrorsPage Errors = new ErrorsPage(driver);
+		Thread.sleep(5000);
+		List<String> dropdownList = dataTable.asList(String.class);
+		List<String> dropdownListUI = BrowserInteractions.getDropDownList(Errors.getPageCount());
+		Assert.assertEquals("The values in the page count dropdown are not correct", dropdownList, dropdownListUI);
+		
+	}
+	
+	@Then("^the default Page Count selection is \"([^\"]*)\"$")
+	public void the_default_Page_Count_selection_is(String displayCount) throws Throwable {
+	    
+		ErrorsPage Errors = new ErrorsPage(driver);
+		Thread.sleep(3000);
+		Select dropdown = new Select(Errors.getPageCount());
+		Assert.assertEquals("Default page count is not 20", displayCount, dropdown.getFirstSelectedOption().getText());
+	}
+
+
+@When("^I select \"([^\"]*)\" in the Page Count select list$")
+public void i_select_in_the_Page_Count_select_list(String pageCount) throws Throwable {
+
+	ErrorsPage Errors = new ErrorsPage(driver);
+	Select dropdown = new Select(Errors.getPageCount());
+	dropdown.selectByVisibleText(pageCount);
+}
+
+@Then("^the Errors result page count will be as expected$")
+public void the_Errors_result_page_count_will_be_as_expected() throws Throwable {
+   
+	ErrorsPage Errors = new ErrorsPage(driver);
+	Thread.sleep(3000);
+	if(!Errors.getResultsCount().getText().contains("No")){
+	System.out.println("Result count is as expected");
+	}
+	} 
+}
 	
 
