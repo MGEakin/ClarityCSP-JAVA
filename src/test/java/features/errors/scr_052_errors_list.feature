@@ -22,3 +22,38 @@ Scenario: Validate Errors list table column headers
 Scenario: Validate result count of Errors against API count 
 	Then the Errors result count will be as expected 
 	
+#    HEADERS SECTION
+  Scenario: Validate page title
+	Then I am on the Errors List page
+	
+#    PAGINATION SECTION
+  Scenario: Validate Items per page selection count
+    And the Page Count display list will contain
+      | 20         |
+      | 50         |
+      | 100        |
+     
+ Scenario: Validate Items per page default value is 20
+	Then the default Page Count selection is "20"
+	
+Scenario: Validate Items per page - select will cause page refresh
+    When I select "50" in the Page Count select list
+    Then the Errors result page count will be as expected
+    When I select "100" in the Page Count select list
+    Then the Errors result page count will be as expected
+    When I select "20" in the Page Count select list
+	Then the Errors result page count will be as expected
+
+
+ # THE FOLLOWING TEST IS BEING INDIRECTLY TESTED IN OTHER TESTS
+  # KEPT IN TO ALIGN WITH MASTER LIST TEST CASES
+  Scenario: click on Search button invokes Popup search windown
+    When I click the Errors - View Report button
+	Then I am on View Report Window page
+	
+# THE FOLLOWING TEST IS BEING INDIRECTLY TESTED IN OTHER TESTS
+#  KEPT IN TO ALIGN WITH MASTER LIST TEST CASES
+  Scenario: click on Add Error button taken to Add Error Page
+    When I click the Errors - View File Details button
+	Then I am on the File Details page
+
