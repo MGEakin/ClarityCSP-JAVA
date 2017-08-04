@@ -110,6 +110,7 @@ public class scr_087_manage_contact_list {
 
 	@When("^I select the Manage Contact - Edit action$")
 	public void i_select_the_Manage_Contact_Edit_action() throws Throwable {
+		Thread.sleep(3000);
 		adminContacts = new AdminContactsPage(driver);
 		BrowserInteractions.click(adminContacts.getEditContact());
 	}
@@ -142,12 +143,12 @@ public class scr_087_manage_contact_list {
 				adminContacts.getEditPageDisplayContact().getAttribute("value"));
 		Assert.assertEquals("Data mismatch in New Support Role", data.get(1).get(6),
 				adminContacts.getEditPageNewSupportRoleName().getAttribute("value"));
+		BrowserInteractions.click(adminContacts.getEditPageCancelButton());
 	}
 
 	@When("^I select the Manage Contact - Delete action$")
 	public void i_select_the_Manage_Contact_Delete_action() throws Throwable {
 		adminContacts = new AdminContactsPage(driver);
-		BrowserInteractions.click(adminContacts.getEditPageCancelButton());
 		Thread.sleep(3000);
 		BrowserInteractions.clickWhenElementVisible(driver, adminContacts.getDeleteButton());
 	}
